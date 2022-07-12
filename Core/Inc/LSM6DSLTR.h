@@ -1,0 +1,87 @@
+/*
+ * LSM6DSLTR.h
+ *
+ *  Created on: May 14, 2022
+ *      Author: andre
+ */
+
+#ifndef INC_LSM6DSLTR_H_
+#define INC_LSM6DSLTR_H_
+
+#include "stm32f4xx_hal.h"
+
+#define LSM6DSLTR_SPI_TIMEOUT_MS 1000
+
+struct LSM6DSLTR_sensorVector {
+	int16_t x, y, z;
+};
+
+typedef struct LSM6DSLTR_Data_Typedef {
+	struct LSM6DSLTR_sensorVector accelerometer;
+	struct LSM6DSLTR_sensorVector gyroscope;
+	int16_t temperature;
+} LSM6DSLTR_Data_Typedef;
+
+typedef enum LSM6DSLTR_Status {
+	LSM6DSLTR_DEVICE_ERROR,
+	LSM6DSLTR_DEVICE_OK
+} LSM6DSLTR_Status;
+
+typedef enum LSM6DSLTR_Odr {
+	LSM6DSLTR_ODR_POWER_DOWN,
+	LSM6DSLTR_ODR_12_5HZ,
+	LSM6DSLTR_ODR_26HZ,
+	LSM6DSLTR_ODR_52HZ,
+	LSM6DSLTR_ODR_104HZ,
+	LSM6DSLTR_ODR_208HZ,
+	LSM6DSLTR_ODR_416HZ,
+	LSM6DSLTR_ODR_833HZ,
+	LSM6DSLTR_ODR_1660HZ,
+	LSM6DSLTR_ODR_3330HZ,
+	LSM6DSLTR_ODR_6660HZ,
+	LSM6DSLTR_ODR_1_6HZ_OR_12_5HZ
+} LSM6DSLTR_ODR;
+
+typedef enum LSM6DSLTR_Accelerometer_Fullscale {
+	LSM6DSLTR_FS_2G,
+	LSM6DSLTR_FS_16G,
+	LSM6DSLTR_FS_4G,
+	LSM6DSLTR_FS_8G
+} LSM6DSLTR_Accelerometer_Fullscale;
+
+typedef enum LSM6DSLTR_Gyroscope_Fullscale {
+	LSM6DSLTR_FS_250DPS,
+	LSM6DSLTR_FS_500DPS,
+	LSM6DSLTR_FS_1KDPS,
+	LSM6DSLTR_FS_2KDPS
+} LSM6DSLTR_Gyroscope_Fullscale;
+
+typedef enum LSM6DSLTR_Settings_FS_125DPS {
+	LSM6DSLTR_SETTING_FS_125DPS_DISABLE,
+	LSM6DSLTR_SETTING_FS_125DPS_ENABLE
+} LSM6DSLTR_Settings_FS_125DPS;
+
+typedef enum LSM6DSLTR_HAS_NEW_DATA_SELECTOR {
+	LSM6DSLTR_ACCELEROMETER_HAS_NEW_DATA,
+	LSM6DSLTR_GYROSCOPE_HAS_NEW_DATA,
+	LSM6DSLTR_THERMOMETER_HAS_NEW_DATA
+} LSM6DSLTR_HAS_NEW_DATA_SELECTOR;
+
+uint8_t LSM6DSLTR_ReadID();
+LSM6DSLTR_Status LSM6DSLTR_Init(SPI_HandleTypeDef*, GPIO_TypeDef*, uint16_t);
+
+void LSM6DSLTR_SetAccelerometerODR_FS(LSM6DSLTR_ODR, LSM6DSLTR_Accelerometer_Fullscale);
+void LSM6DSLTR_SetGyroscopeODR_FS(LSM6DSLTR_ODR, LSM6DSLTR_Gyroscope_Fullscale, LSM6DSLTR_Settings_FS_125DPS);
+void LSM6DSLTR_SoftReset();
+void LSM6DSLTR_I2cDisable();
+void LSM6DSLTR_SoftMagnetometerCorrection();
+uint8_t LSM6DSLTR_HasNewData(LSM6DSLTR_HAS_NEW_DATA_SELECTOR);
+
+void LSM6DSLTR_ReadData(LSM6DSLTR_Data_Typedef*);
+
+uint8_t LSM6DSLTR_ReadRegister(uint8_t);
+void LSM6DSLTR_WriteTo(uint8_t, uint8_t);
+void LSM6DSLTR_EnableCSB();
+void LSM6DSLTR_DisableCSB();
+
+#endif /* INC_LSM6DSLTR_H_ */

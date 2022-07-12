@@ -1,0 +1,9 @@
+tim.c:24:10:hzToPeriod	24	static
+tim.c:31:10:servoAngle	24	static
+tim.c:39:6:setPWM	56	static
+tim.c:60:6:MX_TIM1_Init	32	static
+tim.c:101:6:MX_TIM2_Init	64	static
+tim.c:155:6:MX_TIM3_Init	64	static
+tim.c:209:6:HAL_TIM_Base_MspInit	32	static
+tim.c:250:6:HAL_TIM_MspPostInit	48	static
+tim.c:298:6:HAL_TIM_Base_MspDeInit	16	static

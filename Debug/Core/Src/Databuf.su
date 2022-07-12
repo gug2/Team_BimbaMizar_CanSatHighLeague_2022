@@ -1,0 +1,7 @@
+Databuf.c:12:10:Buf_getDatabuf	0	static
+Databuf.c:16:10:Buf_getDatasize	0	static
+Databuf.c:21:6:Buf_clear	0	static
+Databuf.c:28:6:Buf_push8	0	static
+Databuf.c:34:6:Buf_push16	4	static
+Databuf.c:46:6:Buf_push32	8	static
+Databuf.c:55:7:int16_tToFloat	0	static

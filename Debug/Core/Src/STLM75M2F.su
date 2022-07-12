@@ -1,0 +1,4 @@
+STLM75M2F.c:16:6:HAL_I2C_MasterTxCpltCallback	8	static
+STLM75M2F.c:23:6:HAL_I2C_MasterRxCpltCallback	0	static
+STLM75M2F.c:33:18:STLM75M2F_Init	0	static
+STLM75M2F.c:39:9:STLM75M2F_GetTemperature	16	static
